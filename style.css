@@ -95,7 +95,13 @@ header{
 	cursor: pointer;
 }
 
-
+.products-list{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 3rem;
+}
 .product{
 	align-items: center;
 	display: flex;
