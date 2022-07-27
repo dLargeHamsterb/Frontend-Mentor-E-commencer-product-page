@@ -174,9 +174,10 @@ for(let i=0; i< itemAdd.length; i++){
 
 
 function displayCart (){
+	
 	let cartItems = JSON.parse(localStorage.getItem("productsInCart"));
 	let totalCost= localStorage.getItem("totalCost")
-	if(Object.keys(cartItems).length !== 0){
+	if(cartItems && Object.keys(cartItems).length > 0){
 		cartBody.innerHTML=``;
 		Object.values(cartItems).map(item => {
 			cartBody.innerHTML += `
@@ -195,16 +196,18 @@ function displayCart (){
 							<button class="shop-list">Checkout</button>
 						</div>`
 	}
-	else if (Object.keys(cartItems).length === 0){
+	else if (cartItems && Object.keys(cartItems).length === 0){
 		cartBody.innerHTML=`<main class="cart-body"><p>Your cart is empty.</p></main>`
-		console.log("okkk")
-
 	}
+	// else {cartBody.innerHTML=`<main class="cart-body"><p>Your cart is empty.</p></main>`
+	// }
+	remove(products)
+	
 }
 
 function onLoadCartNumbers(){
 	let productNumbers = localStorage.getItem('cartNumbers');
-	if(productNumbers > 0){
+	if(productNumbers >0){
 		document.querySelector(".in-cart").innerHTML = `<p>${productNumbers}</p>`
 		document.querySelector(".in-cart").classList.add("visable");
 	}else {
@@ -236,12 +239,13 @@ function setItems(product,currentText){
 	if(cartItems){
 		if(cartItems[product.name] == undefined){
 			cartItems = {
-				...cartItems,   
+				...cartItems,
 				[product.name]:product
 			}
 		}
 		cartItems[product.name].inCart += currentTextValue;
-	}else{
+	}
+	else{
 	product.inCart = currentTextValue;
 	cartItems = {
 		[product.name]:product
@@ -263,32 +267,35 @@ function productCost(product,currentText){
 }
 
 
-displayCart ()
-onLoadCartNumbers()
-
 
 //////////////// delete from cart
-
-let deleteImg = document.querySelectorAll(".delete-img")
+function remove(products){
+const deleteImg = document.querySelectorAll(".delete-img")
 
 deleteImg.forEach(function(item,index){
 	item.addEventListener("click",function(){
 		const productCartName = document.querySelectorAll(".product-name")
 		decreseCartNumbers(productCartName[index])
 		decreseTotalCost(productCartName[index])
-		decreseProductInCart(productCartName[index])
+		decreseProductInCart(productCartName[index],products)
 		onLoadCartNumbers()
 		displayCart()
 	})
+	
 })
+}
 
 
-
-
-function decreseProductInCart(productCartName){
+function decreseProductInCart(productCartName,products){
 	let cartItems = JSON.parse(localStorage.getItem('productsInCart'))
 	const product = productCartName.textContent
+	cartItems[product].inCart -= cartItems[product].inCart
 	delete cartItems[product]
+	products.forEach(function(item){
+		if(item.name == product){
+			item.inCart = 0
+		}
+	})
 	localStorage.setItem("productsInCart",JSON.stringify(cartItems))
 }
 
@@ -306,7 +313,10 @@ function decreseCartNumbers(productCartName){
 	let productNumbers = JSON.parse(localStorage.getItem('cartNumbers'))
 	const product = productCartName.textContent
 	productNumbers= productNumbers-cartItems[product].inCart
-	localStorage.setItem("cartNumbers",JSON.stringify(productNumbers))
-}
 
+	localStorage.setItem("cartNumbers",JSON.stringify(productNumbers))
+	
+}
+displayCart ()
+onLoadCartNumbers()
 
