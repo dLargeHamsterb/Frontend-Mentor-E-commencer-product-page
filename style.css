@@ -117,6 +117,7 @@ header{
 	align-items: center;
 	flex-direction: column;
 	gap: 3rem;
+	margin-top: 2rem;
 }
 .product{
 	align-items: center;
@@ -131,7 +132,10 @@ header{
 	gap: 1rem;
 	padding-right: 2rem ;
 }
-
+.img-btn{
+	background: none;
+	border: none;
+}
 .product-img{
 	border-radius: 1rem;
 	height: 400px;
@@ -179,12 +183,17 @@ header{
 .brand {
 	color: var(--color-orange);
 	font-weight: 700;
-	padding-bottom: 2rem;
+	padding-bottom: 1rem;
+}
+.product-name{
+	margin-bottom: 1rem;
+	font-size: 2rem;
+	font-weight: 700;
 }
 h1{
 	font-size: 3rem;
 	line-height: 0.9;
-	padding-bottom: 2rem;
+	padding-bottom: 1rem;
 }
 .description-info{
 	color: var(--color-dark-grayish-blue);
@@ -283,7 +292,7 @@ h1{
 	top: 60px;
 	left: -100px;
 	background-color: var(--color-white);
-	flex-direction: column
+	flex-direction: column;
 }
 .cart-tittle{
 	padding: 1.5rem;
@@ -293,7 +302,7 @@ h1{
 	min-height: 150px;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	text-align: center;
 	flex-direction: column;
 }
 
@@ -302,9 +311,11 @@ h1{
 .cart-product{
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	margin: 1rem 1rem 0 1rem;
 	align-items: center;
-	gap: 1rem;
+	
+	justify-content: space-between;
+
 }
 .thumbnail-cart{
 	height: 60px;
@@ -314,6 +325,7 @@ h1{
 
 .product-cart-info{
 	line-height: 1.5rem;
+	text-align: center;
 }
 .delete-img{
 	background: none;
@@ -322,11 +334,19 @@ h1{
 .delete-img:hover{
 	cursor: pointer;
 }
+.total-cost{
+	margin:1rem 0;
+	padding:1rem;
+	text-align: end;
+	border-top: 1px solid var(--color-grayish-blue);
+	border-bottom: 1px solid var(--color-grayish-blue);
 
+}
 .summary-btn{
 	display: flex;
-	margin-top: 1rem;
+	margin:0 1rem 1rem 1rem;
 	height: 3rem;
+	
 }
 .shop-list{
 	flex-grow: 1;
@@ -334,6 +354,7 @@ h1{
 	background-color: var(--color-orange);
 	border: none;
 	border-radius: 7px;
+	cursor: pointer;
 }
 
 /* gallery-box */
@@ -389,7 +410,6 @@ h1{
 	background: none;
 	border: none;
 	cursor: pointer;
-	direction: none;
 }
 
 .close-icon path{
