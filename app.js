@@ -14,8 +14,12 @@ const currentText = document.querySelectorAll(".current")
 
 const itemAdd = document.querySelectorAll(".item-add")
 const cartBody = document.querySelector(".cart-body")
+const sideMenu = document.querySelector(".main-navigation")
+const openMenu= document.querySelector(".open-side-menu")
+const closeMenu= document.querySelector(".nav-button")
 
-
+openMenu.onclick=()=>  sideMenu.classList.add('visable-menu')
+closeMenu.onclick=()=>  sideMenu.classList.remove('visable-menu')
 cartContainer.onclick = () => shoppingCart.classList.toggle('visable')
 
 
