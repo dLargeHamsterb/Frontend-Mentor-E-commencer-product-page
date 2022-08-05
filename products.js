@@ -7,7 +7,8 @@ export let products = [
 		description: 'These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they’ll withstand everything the weather can offer.',
 		price: 125,
 		inCart:0,
-		photo: ["image-product-1.jpg","image-product-2.jpg","image-product-3.jpg","image-product-4.jpg"]
+		photo: ["image-product-1.jpg","image-product-2.jpg","image-product-3.jpg","image-product-4.jpg"],
+		category: 'women'
 	},
 	{
 		id:2,
@@ -17,7 +18,8 @@ export let products = [
 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod optio asperiores aliquam fugit nemo vitae doloribus odio itaque tempore iure, nihil beatae quasi fugiat harum laborum error quia. Quia, cumque?',
 		price: 50,
 		inCart:0,
-		photo: ["hoodie-product-1.jpg","hoodie-product-2.jpg","hoodie-product-3.jpg","hoodie-product-4.jpg"]
+		photo: ["hoodie-product-1.jpg","hoodie-product-2.jpg","hoodie-product-3.jpg","hoodie-product-4.jpg"],
+		category: 'women'
 	},
 	{
 		id:3,
@@ -27,7 +29,8 @@ export let products = [
 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod optio asperiores aliquam fugit nemo vitae doloribus odio itaque tempore iure, nihil beatae quasi fugiat harum laborum error quia. Quia, cumque?',
 		price: 501,
 		inCart:0,
-		photo: ["hoodie-product-1.jpg","hoodie-product-2.jpg","hoodie-product-3.jpg","hoodie-product-4.jpg"]
+		photo: ["hoodie-product-1.jpg","hoodie-product-2.jpg","hoodie-product-3.jpg","hoodie-product-4.jpg"],
+		category: 'men'
 	}
 ]
 

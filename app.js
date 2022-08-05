@@ -3,16 +3,14 @@ import {products, displayProducts} from './products.js'
 const productList = document.querySelector(".products-list")
 productList.innerHTML=displayProducts(products)
 
-const eachProduct = document.querySelectorAll(".product")
+
 
 const shoppingCart = document.querySelector(".shopping-cart")
 const cartContainer = document.querySelector(".cart-img")
 
-const increase = document.querySelectorAll(".increase")
-const decrease = document.querySelectorAll(".decrease")
-const currentText = document.querySelectorAll(".current")
 
-const itemAdd = document.querySelectorAll(".item-add")
+
+
 const cartBody = document.querySelector(".cart-body")
 const sideMenu = document.querySelector(".main-navigation")
 const openMenu= document.querySelector(".open-side-menu")
@@ -25,8 +23,12 @@ cartContainer.onclick = () => shoppingCart.classList.toggle('visable')
 
 // load main img by click
 
-
-eachProduct.forEach(function (item){
+function loadEverything(){
+	const eachProduct = document.querySelectorAll(".product")
+	const increase = document.querySelectorAll(".increase")
+	const decrease = document.querySelectorAll(".decrease")
+	const currentText = document.querySelectorAll(".current")
+	eachProduct.forEach(function (item){
 	const itemThumbnailImg = item.querySelectorAll(".thumbnail-img")
 	const itemProductImg = item.querySelector(".product-img")
 	const itemGalleryImg = item.querySelector(".gallery-img")
@@ -36,7 +38,6 @@ eachProduct.forEach(function (item){
 	const itemPreviusBtn = item.querySelector(".previus-btn")
 	const itemGalleryThumbnails= item.querySelectorAll(".gallery-thumbnails .thumbnail .thumbnail-img")
 	const itemThumbnailsImg = item.querySelectorAll(".thumbnail-img")
-	
 
 	itemThumbnailImg.forEach(
 		function (item) {
@@ -45,7 +46,6 @@ eachProduct.forEach(function (item){
 				itemGalleryImg.src = item.src
 		}
 	})
-	
 // show/hide gallery
 
 	itemProductImg.addEventListener("click", function(){
@@ -72,17 +72,16 @@ eachProduct.forEach(function (item){
 	itemCloseBtn.addEventListener("click",() => {
 			itemGalleryContainer.classList.remove('visable')
 		})
-	
 	document.addEventListener('keydown', (e)=>{
 		if(e.key === "Escape"){
 			itemGalleryContainer.classList.remove('visable')
 		}
 	})
 
-// next img
-let currentImg = 0;
+	// next img
+	let currentImg = 0;
 
-itemNextBtn.addEventListener("click", function () {
+	itemNextBtn.addEventListener("click", function () {
 		currentImg++
 		if (currentImg > itemGalleryThumbnails.length - 1) {
 			itemProductImg.src = itemGalleryThumbnails[0].src
@@ -138,47 +137,51 @@ itemNextBtn.addEventListener("click", function () {
 
 
 
-})
-
-
-
-// counter
-currentText.forEach(function(item){
-	let counterItem = 0
-	increase.forEach(function(btn){
-		btn.addEventListener("click",()=>{
-		if(item.parentElement == btn.parentElement){
-			counterItem++,
-			item.innerHTML=counterItem}
 	})
-	})
-	decrease.forEach(function(btn){
-		btn.addEventListener("click", ()=> {
-			if(item.parentElement == btn.parentElement && counterItem > 0){
-				counterItem--;
-				item.innerHTML=counterItem;
-			}
+
+
+
+
+	// counter
+	currentText.forEach(function(item){
+		let counterItem = 0
+		increase.forEach(function(btn){
+			btn.addEventListener("click",()=>{
+			if(item.parentElement == btn.parentElement){
+				counterItem++,
+				item.innerHTML=counterItem}
 		})
-	})
+		})
+		decrease.forEach(function(btn){
+			btn.addEventListener("click", ()=> {
+				if(item.parentElement == btn.parentElement && counterItem > 0){
+					counterItem--;
+					item.innerHTML=counterItem;
+				}
+			})
+		})
 
-})
+	})
 
 
 // //////////////////////////////////////////////////////////////////////
 // add to cart
-for(let i=0; i< itemAdd.length; i++){
-	itemAdd[i].addEventListener("click", function(){
-		cartNumbers(products[i],currentText[i])
-		productCost(products[i],currentText[i])
-		displayCart ()
-		onLoadCartNumbers()
-
-	})
+function addToCart(){
+	const itemAdd = document.querySelectorAll(".item-add")
+	for(let i=0; i< itemAdd.length; i++){
+		itemAdd[i].addEventListener("click", function(){
+			cartNumbers(products[i],currentText[i])
+			productCost(products[i],currentText[i])
+			displayCart ()
+			onLoadCartNumbers()
+	
+		})
+	}
 }
 
 
+
 function displayCart (){
-	
 	let cartItems = JSON.parse(localStorage.getItem("productsInCart"));
 	let totalCost= localStorage.getItem("totalCost")
 	if(cartItems && Object.keys(cartItems).length > 0){
@@ -283,7 +286,6 @@ deleteImg.forEach(function(item,index){
 		onLoadCartNumbers()
 		displayCart()
 	})
-	
 })
 }
 
@@ -317,8 +319,31 @@ function decreseCartNumbers(productCartName){
 	productNumbers= productNumbers-cartItems[product].inCart
 
 	localStorage.setItem("cartNumbers",JSON.stringify(productNumbers))
-	
 }
 displayCart ()
 onLoadCartNumbers()
+addToCart()
+}
+// filter product
+const navBtn = document.querySelectorAll(".nav-btn")
 
+
+navBtn.forEach(function(btn){
+btn.addEventListener("click",function(e){
+	const category=e.currentTarget.dataset.id;
+	console.log(category)
+	const productsCategory = products.filter(function (productCategory){
+		if(productCategory.category===category){
+			return productCategory
+		}
+	})
+	if (category === "collections"){
+		productList.innerHTML = displayProducts(products)
+	}
+	else {
+		productList.innerHTML = displayProducts(productsCategory)
+	}
+	loadEverything()
+})
+})
+loadEverything()
